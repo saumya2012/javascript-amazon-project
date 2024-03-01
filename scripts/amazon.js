@@ -75,6 +75,23 @@ document.querySelectorAll('.add-to-cart-button').forEach((button) => {
          quantity: 1
       });
     }
-    console.log(cart);
+
+    let cartQuantity = 0
+
+    cart.forEach((item) => {
+      cartQuantity += item.quantity;
+    })
+    updateCartQuantity(cartQuantity);
+    localStorage.setItem('cartQuantity', JSON.stringify(cartQuantity));
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity')) || 0;
+  updateCartQuantity(cartQuantity);
+});
+
+
+function updateCartQuantity (cartQuantity) {
+  document.querySelector('.cart-quantity').innerHTML = cartQuantity;
+}
