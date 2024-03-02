@@ -38,10 +38,10 @@ export function addToCart (productId, addedMessageTimeoutId) {
   }
 }
 
-export function removeFromCart (productid) {
+export function removeFromCart (productId) {
   let updatedCart = [];
   cart.forEach ((cartItem) => {
-    if (cartItem.productId !== productid) {
+    if (cartItem.productId !== productId) {
       updatedCart.push(cartItem);
     }
   });
