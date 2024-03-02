@@ -1,4 +1,4 @@
-import {cart} from '../data/cart.js';
+import {cart, addToCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 let productsHTML = '';
 
@@ -61,52 +61,23 @@ document.querySelectorAll('.add-to-cart-button').forEach((button) => {
   let addedMessageTimeoutId;
   button.addEventListener('click', () => {
     const {productId} = button.dataset;
-    const quantitySelector = document.querySelector(`.quantity-selector-${productId}`);
-    const quantity = Number(quantitySelector.value);
-    const addedMessage = document.querySelector(`.added-to-cart-${productId}`);
-    addedMessage.classList.add('is-visible');
-    if (addedMessageTimeoutId) {
-      clearTimeout(addedMessageTimeoutId);
-    }
-    
-    const timeoutId = setTimeout(() => {
-      addedMessage.classList.remove('is-visible');
-    }, 2000);
-
-    addedMessageTimeoutId = timeoutId;
-
-    let matchingItem;
-    cart.forEach((item) => {
-      if (productId === item.productId) {
-        matchingItem = item;
-      }
-    });
-
-    if (matchingItem) {
-      matchingItem.quantity += quantity;
-    } else {
-      cart.push({
-        productId,
-         quantity
-      });
-    }
-
-    let cartQuantity = 0
-
-    cart.forEach((item) => {
-      cartQuantity += item.quantity;
-    })
-    updateCartQuantity(cartQuantity);
-    localStorage.setItem('cartQuantity', JSON.stringify(cartQuantity));
+    addToCart(productId, addedMessageTimeoutId);
+    updateCartQuantity();
   });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity')) || 0;
-  updateCartQuantity(cartQuantity);
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity')) || 0;
+//   updateCartQuantity(cartQuantity);
+// });
 
 
-function updateCartQuantity (cartQuantity) {
+function updateCartQuantity (cartQuatity) {
+  let cartQuantity = 0
+
+    cart.forEach((cartItem) => {
+      cartQuantity += cartItem.quantity;
+    })
   document.querySelector('.cart-quantity').innerHTML = cartQuantity;
+  localStorage.setItem('cartQuantity', JSON.stringify(cartQuantity));
 }
