@@ -12,10 +12,9 @@ cart.forEach((cartItem) => {
       matchingProduct = product;
     }
   });
-
+  
   cartSummaryHTML +=
-  `
-    <div class="cart-item-container cart-item-container-${matchingProduct.id}">
+  `<div class="cart-item-container cart-item-container-${matchingProduct.id}">
       <div class="delivery-date">
         Delivery date: Tuesday, June 21
       </div>
@@ -93,6 +92,7 @@ cart.forEach((cartItem) => {
   `
 });
 
+console.log('cart summary', cartSummaryHTML);
 document.querySelector('.order-summary').innerHTML = cartSummaryHTML;
 
 document.querySelectorAll('.delete-quantity-link').forEach((deleteButton) => {
