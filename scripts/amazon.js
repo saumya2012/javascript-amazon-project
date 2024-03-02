@@ -68,18 +68,11 @@ document.querySelectorAll('.add-to-cart-button').forEach((button) => {
   });
 });
 
-// document.addEventListener("DOMContentLoaded", () => {
-//   let cartQuantity = JSON.parse(localStorage.getItem('cartQuantity')) || 0;
-//   updateCartQuantity(cartQuantity);
-// });
-
-
-function updateCartQuantity (cartQuatity) {
+function updateCartQuantity () {
   let cartQuantity = 0
 
     cart.forEach((cartItem) => {
       cartQuantity += cartItem.quantity;
     })
   document.querySelector('.cart-quantity').innerHTML = cartQuantity;
-  localStorage.setItem('cartQuantity', JSON.stringify(cartQuantity));
 }
