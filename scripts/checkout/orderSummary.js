@@ -123,7 +123,8 @@ export function renderOrderSummary () {
       const updatedQuantity = Number(document.querySelector(`.quantity-input-${productId}`).value);
       updateQuantity(productId, updatedQuantity);
       document.querySelector(`.quantity-label-${productId}`).innerHTML = updatedQuantity;
-      updateCartQuantity()
+      updateCartQuantity();
+      renderPaymentSummary();
     });
   });
 
