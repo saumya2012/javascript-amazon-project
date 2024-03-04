@@ -1,4 +1,4 @@
-import {cart, removeFromCart, calculateCartQuantity, updateQuantity, updateDeliveryOption} from '../../data/cart.js';
+import {cart, removeFromCart, updateQuantity, updateDeliveryOption} from '../../data/cart.js';
 import { products, getProduct } from '../../data/products.js';
 import { formatCurrency } from '../utils/money.js';
 import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from '../../data/deliveryOptions.js';
@@ -110,7 +110,8 @@ export function renderOrderSummary () {
       document.querySelector(`.cart-item-container-${productId}`).classList.remove('is-editing-quantity');
       const updatedQuantity = Number(document.querySelector(`.quantity-input-${productId}`).value);
       updateQuantity(productId, updatedQuantity);
-      document.querySelector(`.quantity-label-${productId}`).innerHTML = updatedQuantity;
+      renderCheckoutHeader();
+      renderOrderSummary();
       renderPaymentSummary();
     });
   });
